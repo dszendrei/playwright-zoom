@@ -1,0 +1,22 @@
+{
+  "name": "Playwright Zoom Extension",
+  "version": "1.10",
+  "description": "Provide real zoom settings for Chrome",
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "permissions": ["tabs", "tabGroups"],
+  "manifest_version": 3,
+  "icons": {
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "main.html"
+  }
+}

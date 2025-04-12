@@ -1,0 +1,36 @@
+{
+  "name": "playwright-zoom",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && node copy-extension.js"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "playwright",
+    "zoom",
+    "end-to-end testing",
+    "typescript",
+    "library"
+  ],
+  "author": "Daniel Szendrei",
+  "license": "MIT",
+  "description": "A TypeScript library to enhance Playwright with zoom functionality.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dszendrei/playwright-zoom"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@playwright/test": "^1.44.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "tslib": "^2.8.1"
+  }
+}
