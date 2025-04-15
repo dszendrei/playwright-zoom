@@ -6,11 +6,21 @@ export const testWithZoomExtension = test.extend({
     const contextWithExtension = await chromium.launchPersistentContext("", {
       headless: false,
       args: [
-        `--disable-extensions-except=${pathToExtension},`,
+        `--disable-extensions-except=${pathToExtension}`,
         `--load-extension=${pathToExtension}`,
       ],
     });
     await contextWithExtension.addCookies(await context.cookies());
+    try {
+      let pageWithExntesionToClose: Page | undefined =
+        contextWithExtension.pages()[0];
+      contextWithExtension.on("page", async () => {
+        await pageWithExntesionToClose?.close();
+        pageWithExntesionToClose = undefined;
+      });
+    } catch (error) {
+      console.error("Could not close the extension loading first tab:", error);
+    }
     await use(contextWithExtension);
     try {
       await contextWithExtension.close();
@@ -21,7 +31,7 @@ export const testWithZoomExtension = test.extend({
 });
 
 /**
- * Setting the browser zoom is only available in Chrome. To set the zoom the Playwright Zoom Extension has to be loaded in the test browser.
+ * Setting the browser zoom is only available in Chrome. To set the zoom the Playwright Zoom Extension has to be loaded in the test browser by using the testWithZoomExtension.
  *
  * @param zoom Browser zoom to set in Chrome
  */
